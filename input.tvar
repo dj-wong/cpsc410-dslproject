@@ -1,0 +1,21 @@
+def PRINTY
+    start
+    print YAY
+    print DONE
+    return void
+    end
+
+def VALLEY start
+    print FUN
+    return thisIsTheValue
+    end
+
+new x
+new y
+set x 3
+set y 17
+times 3 do print get x
+times 5 do print get y
+times 2 do print hello!!
+call PRINTY
+print call VALLEY
