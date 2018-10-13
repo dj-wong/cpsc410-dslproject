@@ -17,6 +17,7 @@
   ],
   "shapes": [
     {
+      "text": "Parks n Science World",
       "locations": [
         {
           "lat": 49.3043,
@@ -35,6 +36,7 @@
   ],
   "lines": [
     {
+      "text": "Rando Line",
       "locations": [
         {
           "lat": 49.2276,

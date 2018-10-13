@@ -7,14 +7,17 @@
         });
     });
 
-    function addContentToInfoWindow(infoWindow, element, text) {
+    function addContentToInfoWindow(infowindow, element, text, requiresPosition) {
         let contentString =
             '<div id="content">'+
-            text +
+                text +
             '</div>';
-        google.maps.event.addListener(element, 'click', function() {
+        google.maps.event.addListener(element, "click", function(event) {
             infowindow.setContent(contentString);
-            infowindow.open(map, element);
+            if (requiresPosition) {
+                infowindow.setPosition(event.latLng);
+            }
+            infowindow.open(map, requiresPosition ? null: element);
         });
     }
 
@@ -26,8 +29,12 @@
             const latlngbounds = new google.maps.LatLngBounds();
             const infowindow = new google.maps.InfoWindow();
 
-            const addInfoWindow = (element, text) => { // HOF to not require infowindow parameter every time
-                addContentToInfoWindow(infowindow, element, text);
+            google.maps.event.addListener(map, "click", function() {
+                infowindow.close();
+            });
+
+            const addInfoWindow = (element, text, requiresPosition) => { // HOF to not require infowindow parameter every time
+                addContentToInfoWindow(infowindow, element, text, requiresPosition);
             };
 
             const extendBounds = (locations) => {
@@ -61,7 +68,7 @@
                 });
 
                 if (text) {
-                    addInfoWindow(polygon, text);
+                    addInfoWindow(polygon, text, true);
                 }
 
                 extendBounds(polygon.getPath());
@@ -76,11 +83,11 @@
                     geodesic: true,
                     strokeColor: '#FF0000',
                     strokeOpacity: 1.0,
-                    strokeWeight: 2
+                    strokeWeight: 5
                 });
 
                 if (text) {
-                    addInfoWindow(line, text);
+                    addInfoWindow(line, text, true);
                 }
 
                 extendBounds(line.getPath());
