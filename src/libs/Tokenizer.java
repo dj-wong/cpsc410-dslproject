@@ -38,6 +38,10 @@ public class Tokenizer {
         }
         System.out.println(tokenizedProgram);
         String [] temparray=tokenizedProgram.split("[_]+");
+        for(int i = 0; i < temparray.length; i++) {
+            String str = temparray[i];
+            temparray[i] = str.trim();
+        }
         tokens = new String[temparray.length-1];
 
         System.arraycopy(temparray,1,tokens,0,temparray.length-1);
