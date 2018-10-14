@@ -6,12 +6,12 @@ import libs.Tokenizer;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 public class Main {
-    public static Map<String,Object> symbolTable = new HashMap<>();
+    public static JSONObject obj = new JSONObject();
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
         List<String> literals = Arrays.asList("create location ", "create locations ", "create marker",
@@ -22,7 +22,6 @@ public class Main {
         p.parse();
         p.evaluate();
         System.out.println("completed successfully");
-        System.out.println(symbolTable);
     }
 
 }
