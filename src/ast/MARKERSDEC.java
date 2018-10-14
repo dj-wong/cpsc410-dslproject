@@ -8,12 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MARKERSDEC extends STATEMENT {
-    private List<String> names;
+    private String names;
+    private String locationNames;
 
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("create markers");
-        names = new ArrayList<>();
+        names = tokenizer.getNext();
+        tokenizer.getAndCheckNext("at");
+        locationNames = tokenizer.getNext();
     }
 
     @Override

@@ -8,13 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LOCATIONSDEC extends STATEMENT {
-    private List<String> names;
+    private String name;
+    private String locations;
 
     @Override
     public void parse() {
-        tokenizer.getAndCheckNext("new");
-        names = new ArrayList<>();
-        // TODO parse names
+        tokenizer.getAndCheckNext("create locations");
+        name = tokenizer.getNext();
+        tokenizer.getAndCheckNext("at");
+        locations = tokenizer.getNext();
     }
 
     @Override

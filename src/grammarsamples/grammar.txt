@@ -21,7 +21,7 @@ create location L3 at {Pacific Center}
 create locations LOCATIONSLIST at [49.26, 50.26; {2300 W Broadway, Vancouver, BC V6K 2E5}; 53.26, 54.26]
 
 create marker M1 at L1
-create markers M2, M3, M4 at locations L1, L2, L3
+create markers M2, M3, M4 at L1, L2, L3
 
 create shape SHAPE1 around L1, L2, L3
 create shape SHAPE2 around LOCATIONSLIST

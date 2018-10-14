@@ -45,7 +45,6 @@ public class Tokenizer {
         tokens = new String[temparray.length-1];
 
         System.arraycopy(temparray,1,tokens,0,temparray.length-1);
-//        for (String: s: tokens) {
         System.out.println(Arrays.asList(tokens));
     }
 

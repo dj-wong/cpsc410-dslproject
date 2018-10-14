@@ -7,12 +7,14 @@ import java.io.UnsupportedEncodingException;
 
 public class LOCATIONDEC extends STATEMENT {
     private String name;
+    private String location;
 
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("create location");
         name = tokenizer.getNext();
-        // TODO do more stuff
+        tokenizer.getAndCheckNext("at");
+        location = tokenizer.getNext();
     }
 
     @Override
