@@ -9,14 +9,21 @@ import java.util.List;
 
 public class LOCATIONSDEC extends STATEMENT {
     private String name;
-    private String locations;
+    private List<LOCATION> locationsList;
 
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("create locations");
         name = tokenizer.getNext();
         tokenizer.getAndCheckNext("at");
-        locations = tokenizer.getNext();
+        String locations = tokenizer.getNext();
+        locations = locations.substring(locations.indexOf("[") + 1, locations.indexOf("]"));
+        String[] locationsToParse = locations.split(";");
+        locationsList = new ArrayList<LOCATION>();
+        for (int i = 0; i < locationsToParse.length; i++) {
+            String location = locationsToParse[i].trim();
+            locationsList.add(new LOCATION(location));
+        }
     }
 
     @Override

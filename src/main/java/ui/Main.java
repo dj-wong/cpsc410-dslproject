@@ -9,9 +9,11 @@ import java.util.Arrays;
 import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import com.google.maps.GeoApiContext;
 
 public class Main {
     public static JSONObject obj = new JSONObject();
+    private static GeoApiContext geoApiContext = new GeoApiContext.Builder().apiKey("AIzaSyA8lov5bsPUAphZ54tVSGGNfxl6qXZLlwM").build();
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
         List<String> literals = Arrays.asList("create location ", "create locations ", "create marker",
@@ -24,4 +26,7 @@ public class Main {
         System.out.println("completed successfully");
     }
 
+    public static GeoApiContext getGeoApiContext() {
+        return geoApiContext;
+    }
 }
