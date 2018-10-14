@@ -47,11 +47,13 @@ public class MARKERSDEC extends STATEMENT {
             String locationName = locationNames.get(i);
 
             LOCATION location = locationHashMap.get(locationName);
+            JSONObject markerObj = new JSONObject();
             JSONObject newLoc = new JSONObject();
             newLoc.put("lat", location.getLat());
             newLoc.put("lng", location.getLng());
+            markerObj.put("location", newLoc);
 
-            markers.put(name, newLoc);
+            markers.put(name, markerObj);
         }
         return null;
     }

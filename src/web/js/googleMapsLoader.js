@@ -1,8 +1,7 @@
 (function(){
     let map;
-    // let center = {lat: 49.246292, lng: -123.116226}; // "map center on <49.246292, -123.116226>"
     const mapJSON = new Promise((resolve, reject) => {
-        $.getJSON("fixtures/sample.json", json => {
+        $.getJSON("fixtures/mapData.json", json => {
             resolve(json);
         });
     });
@@ -43,7 +42,7 @@
                 })
             };
 
-            markers.forEach(markerInfo => {
+            Object.values(markers).forEach(markerInfo => {
                 const location = markerInfo.location;
                 const text = markerInfo.text;
                 const marker = new google.maps.Marker({position: location, map});
@@ -54,7 +53,7 @@
                 latlngbounds.extend(marker.getPosition());
             });
 
-            shapes.forEach(shapeInfo => {
+            Object.values(shapes).forEach(shapeInfo => {
                 const locations = shapeInfo.locations;
                 const text = shapeInfo.text;
                 const polygon = new google.maps.Polygon({
@@ -74,7 +73,7 @@
                 extendBounds(polygon.getPath());
             });
 
-            lines.forEach(lineInfo => {
+            Object.values(lines).forEach(lineInfo => {
                 const locations = lineInfo.locations;
                 const text = lineInfo.text;
                 const line = new google.maps.Polyline({

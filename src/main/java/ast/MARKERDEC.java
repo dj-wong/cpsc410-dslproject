@@ -25,11 +25,13 @@ public class MARKERDEC extends STATEMENT {
         HashMap<String, LOCATION> locationHashMap = Main.getLocationHashMap();
         JSONObject markers = Main.getMarkers();
         LOCATION location = locationHashMap.get(locationName);
+        JSONObject markerObj = new JSONObject();
         JSONObject newLoc = new JSONObject();
         newLoc.put("lat", location.getLat());
         newLoc.put("lng", location.getLng());
-        
-        markers.put(name, newLoc);
+        markerObj.put("location", newLoc);
+
+        markers.put(name, markerObj);
         return null;
     }
 }

@@ -30,7 +30,7 @@ public class Main {
         p.evaluate();
         String jsonString = json.toString(4);
         System.out.println(jsonString);
-        FileWriter fileWriter = new FileWriter("./src/web/fixtures/mapData.json", true);
+        FileWriter fileWriter = new FileWriter("./src/web/fixtures/mapData.json", false);
         try {
             fileWriter.write(jsonString);
             System.out.println("Successfully Copied JSON Object to File...");
