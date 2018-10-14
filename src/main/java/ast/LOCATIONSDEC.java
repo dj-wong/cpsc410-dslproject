@@ -5,6 +5,7 @@ import ui.Main;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class LOCATIONSDEC extends STATEMENT {
@@ -28,6 +29,8 @@ public class LOCATIONSDEC extends STATEMENT {
 
     @Override
     public String evaluate() throws FileNotFoundException, UnsupportedEncodingException {
+        HashMap<String, List<LOCATION>> locationListHashMap = Main.getLocationListHashMap();
+        locationListHashMap.put(name, locationsList);
         return null;
     }
 }
