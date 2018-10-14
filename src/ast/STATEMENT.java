@@ -4,30 +4,28 @@ import libs.Node;
 
 public  abstract class STATEMENT extends Node {
     public static STATEMENT getSubStatement(){
-        if (tokenizer.checkToken("set")) {
-            return new SET();
+        if (tokenizer.checkToken("create location")) {
+            return new LOCATIONDEC();
         }
-        if (tokenizer.checkToken("get")){
-            return new USE();
+        if (tokenizer.checkToken("create locations")) {
+            return new LOCATIONSDEC();
         }
-        if (tokenizer.checkToken("new")){
-            return new DEC();
+        if (tokenizer.checkToken("create marker")) {
+            return new MARKERDEC();
         }
-        if (tokenizer.checkToken("print")){
-            return new PRINT();
+        if (tokenizer.checkToken("create markers")) {
+            return new MARKERSDEC();
         }
-        if (tokenizer.checkToken("times")){
-            return new TIMES();
+        if (tokenizer.checkToken("create shape")) {
+            return new SHAPEDEC();
         }
-        if (tokenizer.checkToken("def")){
-            //the fact that we're including this might be a problem
-            //as we evolve our language -- eventually we may want to put procedure definitions
-            //in another category
-            return new PROCDEC();
+        if (tokenizer.checkToken("create line")) {
+            return new LINEDEC();
         }
-        if (tokenizer.checkToken("call")){
-            return new PROCCALL();
+        if (tokenizer.checkToken("add infowindow")) {
+            return new INFOWINDOWDEC();
         }
+
         else return null;
     }
 }

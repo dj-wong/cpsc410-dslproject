@@ -14,7 +14,9 @@ public class Main {
     public static Map<String,Object> symbolTable = new HashMap<>();
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
-        List<String> literals = Arrays.asList("get","set","print","new","times","do","def","call","start","end", "return");
+        List<String> literals = Arrays.asList("create location ", "create locations ", "create marker",
+                "create markers ", "create line", "create shape", "between", "around",
+                "add infowindow", "with content", " at ", " to ");
         Tokenizer.makeTokenizer("input.tvar",literals);
         PROGRAM p = new PROGRAM();
         p.parse();

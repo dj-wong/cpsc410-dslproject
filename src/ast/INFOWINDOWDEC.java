@@ -5,7 +5,7 @@ import ui.Main;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
-public class DEC extends STATEMENT {
+public class INFOWINDOWDEC extends STATEMENT {
     private String name;
 
     @Override

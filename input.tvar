@@ -1,21 +1,17 @@
-def PRINTY
-    start
-    print YAY
-    print DONE
-    return void
-    end
+create location L1 at 49.267752, -123.208391
+create location L2 at {2300 W Broadway, Vancouver, BC V6K 2E5}
+create location L3 at {Pacific Center}
+create locations LOCATIONSLIST at {49.26, 50.26; {2300 W Broadway, Vancouver, BC V6K 2E5}; 53.26, 54.26}
 
-def VALLEY start
-    print FUN
-    return thisIsTheValue
-    end
+create marker M1 at L1
+create markers M2, M3, M4 at locations L1, L2, L3
 
-new x
-new y
-set x 3
-set y 17
-times 3 do print get x
-times 5 do print get y
-times 2 do print hello!!
-call PRINTY
-print call VALLEY
+create shape SHAPE1 around L1, L2, L3
+create shape SHAPE2 around LOCATIONSLIST
+
+create line LINE1 between L1, L2, L3
+create line LINE2 between LOCATIONSLIST
+
+add infowindow to M1 with content "UBC Location"
+add infowindow to SHAPE1 with content "This is some shape"
+add infowindow to LINE1 with content "this is a line i think"

@@ -1,43 +1,101 @@
 (function(){
     let map;
-    let center = {lat: 49.246292, lng: -123.116226}; // "map center on <49.246292, -123.116226>"
-    let zoom = 11; // "map zoom-level 11"
-    let markers = [
-        {
-            title: "UBC", // "create marker on <49.2606, -123.2460> with label 'UBC'"
-            coordinates: {
-                lat: 49.2606,
-                lng: -123.2460
-            }
-        },
-        {
-            title: "Pacific Center", // "create marker on <49.2833, -123.1178> with label 'Pacific Center'"
-            coordinates: {
-                lat: 49.2833,
-                lng: -123.1178
-            }
-        }
-    ]
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center,
-            zoom
+    // let center = {lat: 49.246292, lng: -123.116226}; // "map center on <49.246292, -123.116226>"
+    const mapJSON = new Promise((resolve, reject) => {
+        $.getJSON("fixtures/sample.json", json => {
+            resolve(json);
         });
+    });
 
-        for(var i = 0; i < markers.length; i++) {
-            let location = markers[i].coordinates;
-            let text = markers[i].title;
-            let contentString =
-                '<div id="content">'+
+    function addContentToInfoWindow(infowindow, element, text, requiresPosition) {
+        let contentString =
+            '<div id="content">'+
                 text +
-                '</div>';
-            let infowindow = new google.maps.InfoWindow();
-            let marker = new google.maps.Marker({position: location, map: map, title: text});
-            google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent(contentString);
-                infowindow.open(map, marker);
+            '</div>';
+        google.maps.event.addListener(element, "click", function(event) {
+            infowindow.setContent(contentString);
+            if (requiresPosition) {
+                infowindow.setPosition(event.latLng);
+            }
+            infowindow.open(map, requiresPosition ? null: element);
+        });
+    }
+
+    function initMap() {
+        Promise.resolve(mapJSON).then(mapData => {
+            const {markers, lines, shapes} = mapData;
+             map = new google.maps.Map(document.getElementById("map"));
+
+            const latlngbounds = new google.maps.LatLngBounds();
+            const infowindow = new google.maps.InfoWindow();
+
+            google.maps.event.addListener(map, "click", function() {
+                infowindow.close();
             });
-        }
+
+            const addInfoWindow = (element, text, requiresPosition) => { // HOF to not require infowindow parameter every time
+                addContentToInfoWindow(infowindow, element, text, requiresPosition);
+            };
+
+            const extendBounds = (locations) => {
+                locations.forEach(location => {
+                    latlngbounds.extend(location);
+                })
+            };
+
+            markers.forEach(markerInfo => {
+                const location = markerInfo.location;
+                const text = markerInfo.text;
+                const marker = new google.maps.Marker({position: location, map});
+                if (text) {
+                    addInfoWindow(marker, text);
+                }
+
+                latlngbounds.extend(marker.getPosition());
+            });
+
+            shapes.forEach(shapeInfo => {
+                const locations = shapeInfo.locations;
+                const text = shapeInfo.text;
+                const polygon = new google.maps.Polygon({
+                    map,
+                    paths: locations,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.35
+                });
+
+                if (text) {
+                    addInfoWindow(polygon, text, true);
+                }
+
+                extendBounds(polygon.getPath());
+            });
+
+            lines.forEach(lineInfo => {
+                const locations = lineInfo.locations;
+                const text = lineInfo.text;
+                const line = new google.maps.Polyline({
+                    map,
+                    path: locations,
+                    geodesic: true,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 5
+                });
+
+                if (text) {
+                    addInfoWindow(line, text, true);
+                }
+
+                extendBounds(line.getPath());
+            });
+
+            map.fitBounds(latlngbounds)
+
+        });
     }
 
     window.initMap = function() {
