@@ -1,11 +1,15 @@
 package ast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import ui.Main;
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.List;
 
-public class LINEDEC extends STATEMENT {
+public class LINEDEC extends POLYLOCATIONDEC {
     private String name;
     private String locationNames;
 
@@ -19,6 +23,11 @@ public class LINEDEC extends STATEMENT {
 
     @Override
     public String evaluate() throws FileNotFoundException, UnsupportedEncodingException {
+        JSONObject lines = Main.getLines();
+        JSONArray paths = this.evaluateLocations(locationNames);
+        JSONObject newShape = new JSONObject();
+        newShape.put("locations", paths);
+        lines.put(name, newShape);
         return null;
     }
 }

@@ -6,10 +6,10 @@ create locations LOCATIONSLIST at [49.26, 50.26; {2300 W Broadway, Vancouver, BC
 create marker M1 at L1
 create markers M2, M3, M4 at L1, L2, L3
 
-create shape SHAPE1 around L1, L2, L3
+create shape SHAPE1 around [L1, L2, L3]
 create shape SHAPE2 around LOCATIONSLIST
 
-create line LINE1 between L1, L2, L3
+create line LINE1 between [L1, L2, L3]
 create line LINE2 between LOCATIONSLIST
 
 add infowindow to M1 with content "UBC Location"

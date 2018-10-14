@@ -26,6 +26,8 @@ public class MARKERSDEC extends STATEMENT {
             System.out.println("Incorrect number of markers and locations");
             System.exit(1);
         }
+        names = new ArrayList<String>();
+        locationNames = new ArrayList<String>();
         for(int i = 0; i < nameList.length; i++) {
             names.add(nameList[i].trim());
         }
