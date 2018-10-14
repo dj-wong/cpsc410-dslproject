@@ -13,7 +13,7 @@ import com.google.maps.GeoApiContext;
 
 public class Main {
     public static JSONObject obj = new JSONObject();
-    private static GeoApiContext geoApiContext = new GeoApiContext.Builder().apiKey("AIzaSyA8lov5bsPUAphZ54tVSGGNfxl6qXZLlwM").build();
+    private static GeoApiContext geoApiContext = new GeoApiContext.Builder().apiKey("API_KEY").build();
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
         List<String> literals = Arrays.asList("create location ", "create locations ", "create marker",
